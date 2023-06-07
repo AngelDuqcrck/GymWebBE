@@ -2,14 +2,16 @@ package com.gymbe.powergymweb.Entity;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +22,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "plan")
+@Table(name = "cliente")
 public class Cliente {
     
     @Id
@@ -31,11 +33,17 @@ public class Cliente {
 
     private double peso; 
 
+    @Column(nullable = false, length = 50)
+    @NotEmpty
     private String genero;
 
     private Date fechaNacimiento;
 
     private Date fechaInicioMensualidad;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario user;
 
 
 }

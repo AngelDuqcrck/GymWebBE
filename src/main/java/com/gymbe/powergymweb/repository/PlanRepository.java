@@ -1,11 +1,12 @@
 package com.gymbe.powergymweb.repository;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import com.gymbe.powergymweb.Entity.Plan;
+import java.util.Optional;
 
-@Repository
+
+
 public interface PlanRepository extends JpaRepository<Plan, Integer> {
-    
+    Plan findByNombre(String nombre);
+
+    Optional<Plan> findById(int id);
 }
