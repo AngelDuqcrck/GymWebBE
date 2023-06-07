@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS rol (
+id INT NOT NULL AUTO_INCREMENT,
+descripcion VARCHAR(20) NOT NULL,
+PRIMARY KEY (id),
+UNIQUE KEY (descripcion)
+);
+
+INSERT IGNORE INTO rol (id,descripcion) VALUES
+(1,"ADMIN"),
+(2,"ENTRENADOR"),
+(3,"CLIENTE");
