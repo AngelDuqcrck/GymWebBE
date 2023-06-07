@@ -9,6 +9,8 @@ import java.util.Map;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.gymbe.powergymweb.Entity.Usuario;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -27,15 +29,16 @@ public class TokenUtils {
      * @param email
      * @return
      */
-    public static String createToken(String nombre, String email, int id) {
+    public static String createToken(UserDetailsImpl s) {
         long expirationTime = ACCESS_TOKEN_VALIDITY_SECONDS * 1000;
         Date expirationDate = new Date(System.currentTimeMillis() + expirationTime );
         Map <String, Object> extra = new HashMap<>();
-        extra.put("nombre", nombre);
-        extra.put("id", id);
+        extra.put("nombre", s.getNombre());
+        extra.put("id", s.getId());
+        extra.put("role", s.getRol());
 
         return Jwts.builder()
-                    .setSubject(email)
+                    .setSubject(s.getUsername())
                     .setExpiration(expirationDate)
                     .addClaims(extra)
                     .signWith(SignatureAlgorithm.HS256, ACCESS_TOKEN_SECRET.getBytes())
@@ -44,7 +47,7 @@ public class TokenUtils {
 
     public static UsernamePasswordAuthenticationToken getAuthenticationToken(String token) {
         try {
-            Claims claims = (Claims) Jwts.parser()
+            Claims claims = (Claims) Jwts.parser().setSigningKey(ACCESS_TOKEN_SECRET.getBytes())
                             .parse(token)
                             .getBody();
 
