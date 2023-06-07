@@ -1,12 +1,7 @@
 package com.gymbe.powergymweb.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,14 +18,24 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false, length = 255)
+    @NotEmpty
+    @Email
     private String correo;
 
+    
     private String contrasena;
 
-    @ManyToOne
-    @JoinColumn(name = "rol_id")
-    private Rol rol_id;
+    @ManyToOne (fetch=FetchType.EAGER)
+    @JoinColumn(name = "rol_id", nullable = false)
+    private Rol rol;
 
     private String nombre;
+
+    //Revisar esta relacion se totea por algo de seguridad
+    /*@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Cliente cliente;
+    */
+
 
 }

@@ -1,13 +1,22 @@
 package com.gymbe.powergymweb.repository;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
+import com.gymbe.powergymweb.Entity.Rol;
 import com.gymbe.powergymweb.Entity.Usuario;
 
-@Repository
+import java.util.List;
+import java.util.Optional;
+
+
+
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-    Optional <Usuario> findOneByCorreo(String correo);
+    
+    Usuario findByCorreo(String correo);
+
+    @Override
+    Optional<Usuario> findById(Integer integer);
+
+    List<Usuario> findByRol(Rol rol);
+
 }
