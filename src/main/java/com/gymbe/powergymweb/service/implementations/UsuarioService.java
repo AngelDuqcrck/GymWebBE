@@ -12,6 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.User;
 
@@ -33,6 +34,8 @@ public class UsuarioService implements UsuarioServiceInteface {
     ClienteRepository clienteRepository;
     @Autowired
     RolRepository rolRepository;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * Crea un nuevo entrenador a partir de un objeto UsuarioDTO.
@@ -125,6 +128,22 @@ public class UsuarioService implements UsuarioServiceInteface {
             throw new UsernameNotFoundException("Error en el Login: usuario '" + username + "' no tiene roles asignados!");
         }
         return new User(userEntity.getCorreo(), userEntity.getContrasena(), authorities);
+    }
+
+    @Override
+    public String crearUsuario(UsuarioDTO usuario) {
+        //No dejaria crear usuarios si no hay cohorte abierta y sin admin no se puede abrir cohorte
+
+        if (usuarioRepository.findByCorreo(usuario.getCorreo()) != null )
+            throw new EmailExistsException("Ya existe una cuenta con el correo electrónico proporcionado");
+
+        Usuario userEntity = new Usuario();
+        BeanUtils.copyProperties(usuario, userEntity);
+
+        userEntity.setContrasena( bCryptPasswordEncoder.encode(usuario.getContrasena()) );
+        userEntity.setRol(rolRepository.findByDescripcion("ROLE_ClIENTE"));
+
+        return "Usurio creado xd";
     }
 
 }

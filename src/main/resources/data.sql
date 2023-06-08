@@ -70,6 +70,6 @@ CREATE TABLE IF NOT EXISTS usuario (
     FOREIGN KEY (rol_id) REFERENCES rol (id)
 );
 
-INSERT INTO usuario (correo, contrasena, nombre, rol_id)  VALUES 
-    ("admin@admin.com", "$2a$12$4AzuqGNswepxwcpCYyGCqeQFopXvxM8yFgs.QlyPmhOE6yJqhLai.", "administrador", 1)
+INSERT IGNORE INTO usuario (id,correo, contrasena, nombre, rol_id)  VALUES 
+    (1,"admin@admin.com", "$2a$12$4AzuqGNswepxwcpCYyGCqeQFopXvxM8yFgs.QlyPmhOE6yJqhLai.", "administrador", 1)
 

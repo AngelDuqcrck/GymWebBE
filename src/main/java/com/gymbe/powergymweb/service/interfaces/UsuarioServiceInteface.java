@@ -14,5 +14,7 @@ public interface UsuarioServiceInteface extends UserDetailsService{
 
     public List<UsuarioDTO> ListarUsuariosPorRol(String rol);
 
+    public String crearUsuario(UsuarioDTO usuario);
+
 
 }
