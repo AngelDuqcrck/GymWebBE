@@ -8,5 +8,5 @@ public interface EjercicioServiceInterface {
     
     public List<EjercicioDTO> listarEjercicios();
 
-    //public EjercicioDTO crearEjercicio(EjercicioDTO ejercicio);
+    public EjercicioDTO crearEjercicio(EjercicioDTO ejercicio);
 }

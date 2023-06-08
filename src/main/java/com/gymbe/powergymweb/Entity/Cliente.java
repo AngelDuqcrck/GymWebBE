@@ -30,8 +30,6 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String nombre;
-
     private double altura;
 
     private double peso; 
@@ -43,5 +41,10 @@ public class Cliente {
     private Date fechaNacimiento;
 
     private Date fechaInicioMensualidad;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario user;
+
 
 }

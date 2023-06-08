@@ -3,6 +3,7 @@ package com.gymbe.powergymweb.service.implementations;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,13 @@ public class EjercicioService implements EjercicioServiceInterface {
     @Autowired
     private EjercicioRepository ejercicioRepository;
 
+    /**
+     * Crea un nuevo ejercicio a partir del objeto EjercicioDTO proporcionado.
+     *
+     * @param ejercicio El objeto EjercicioDTO que contiene los datos del ejercicio
+     *                  a crear.
+     * @return El objeto EjercicioDTO del ejercicio recién creado.
+     */
     @Override
     public List<EjercicioDTO> listarEjercicios() {
         List<Ejercicio> ejercicioEntities = ejercicioRepository.findAll();
@@ -25,14 +33,32 @@ public class EjercicioService implements EjercicioServiceInterface {
                 .collect(Collectors.toList());
     }
 
-    
+    /**
+     * Crea un nuevo ejercicio a partir del objeto EjercicioDTO proporcionado.
+     *
+     * @param ejercicio El objeto EjercicioDTO que contiene los datos del ejercicio
+     *                  a crear.
+     * @return El objeto EjercicioDTO del ejercicio recién creado.
+     */
+    @Override
+    public EjercicioDTO crearEjercicio(EjercicioDTO ejercicio) {
+        Ejercicio ejercicioEntity = new Ejercicio();
+        BeanUtils.copyProperties(ejercicio, ejercicioEntity);
+        Ejercicio nuevoEjercicio = ejercicioRepository.save(ejercicioEntity);
+        EjercicioDTO nuevoEjercicioDTO = new EjercicioDTO();
+        BeanUtils.copyProperties(nuevoEjercicio, nuevoEjercicioDTO);
+        return nuevoEjercicioDTO;
+    }
 
+    /**
+     * Convierte un objeto Ejercicio a un objeto EjercicioDTO.
+     *
+     * @param ejercicio El objeto Ejercicio a convertir.
+     * @return El objeto EjercicioDTO convertido.
+     */
     private EjercicioDTO convertToEjercicioDTO(Ejercicio ejercicio) {
         EjercicioDTO ejercicioDTO = new EjercicioDTO();
-        ejercicioDTO.setDescripcion(ejercicio.getDescripcion());
-        ejercicioDTO.setMusculoObjetivo_id(ejercicio.getMusculoObjetivo_id());
-        ejercicioDTO.setParteCuerpo_id(ejercicio.getParteCuerpo_id());
-        ejercicioDTO.setUrlGif(ejercicio.getUrlGif());
+        BeanUtils.copyProperties(ejercicio, ejercicioDTO);
         return ejercicioDTO;
     }
 

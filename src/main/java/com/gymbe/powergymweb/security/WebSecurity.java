@@ -28,8 +28,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-            .antMatchers( "/","/users","/login","/ejercicios/","/plan/").permitAll()
-            .antMatchers( "/**","/users/**","/ejercicios/**","/plan/**").permitAll()
+            .antMatchers( "/","/users","/login","/ejercicios/","/plan/", "/musculo", "/bodypart").permitAll()
+            .antMatchers( "/**","/users/**","/ejercicios/**","/plan/**", "/musculo/**", "/bodypart/**").permitAll()
             .anyRequest().authenticated().and()
             .addFilter(getAuthenticationFilter())
             .addFilter(new AuthorizationFilter(authenticationManager(), jwtService)).sessionManagement()

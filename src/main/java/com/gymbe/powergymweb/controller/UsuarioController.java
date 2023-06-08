@@ -80,6 +80,4 @@ public class UsuarioController {
         return response;
     }
 
-
-
 }
