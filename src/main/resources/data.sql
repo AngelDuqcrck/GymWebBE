@@ -1,14 +1,14 @@
 CREATE TABLE IF NOT EXISTS rol (
-id INT NOT NULL AUTO_INCREMENT,
-descripcion VARCHAR(20) NOT NULL,
-PRIMARY KEY (id),
-UNIQUE KEY (descripcion)
+    id INT NOT NULL AUTO_INCREMENT,
+    descripcion VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY (descripcion)
 );
 
 INSERT IGNORE INTO rol (id,descripcion) VALUES
-(1,"ADMIN"),
-(2,"ENTRENADOR"),
-(3,"CLIENTE");
+    (1,"ROLE_ADMIN"),
+    (2,"ROLE_ENTRENADOR"),
+    (3,"ROLE_CLIENTE");
 
 CREATE TABLE IF NOT EXISTS plan (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -60,3 +60,16 @@ INSERT IGNORE INTO parte_del_cuerpo (id, descripcion) VALUES
     (8, "brazos superiores"),
     (9, "piernas altas"),
     (10, "cintura");
+
+CREATE TABLE IF NOT EXISTS usuario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    contrasena VARCHAR(255) NOT NULL, 
+    correo VARCHAR(255) NOT NULL,
+    nombre VARCHAR(255) NOT NULL,
+    rol_id int,
+    FOREIGN KEY (rol_id) REFERENCES rol (id)
+);
+
+INSERT INTO usuario (correo, contrasena, nombre, rol_id)  VALUES 
+    ("admin@admin.com", "$2a$12$4AzuqGNswepxwcpCYyGCqeQFopXvxM8yFgs.QlyPmhOE6yJqhLai.", "administrador", 1)
+
