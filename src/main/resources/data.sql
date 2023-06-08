@@ -22,3 +22,41 @@ INSERT IGNORE INTO plan (id, nombre, descripcion, precio) VALUES
     (2, 'Total Body Transformation', 'Está diseñado para aquellos que desean transformar completamente su cuerpo. Incluye un programa integral que combina entrenamiento de fuerza, ejercicios de alta intensidad, sesiones de cardio y clases de yoga para mejorar la flexibilidad y el equilibrio. Además, se brinda asesoramiento nutricional individualizado para optimizar los resultados. Este plan también ofrece seguimiento regular del progreso y apoyo constante por parte de entrenadores especializados.', 100000),
     (3, 'Mind & Body Wellness', 'Se centra en el bienestar holístico, combinando entrenamiento físico con prácticas de relajación y equilibrio mental. Incluye acceso a clases de yoga, pilates y meditación, que ayudan a mejorar la flexibilidad, la fuerza muscular y la tranquilidad mental. Este plan también ofrece sesiones individuales de terapia de masajes y asesoramiento de bienestar para fomentar el autocuidado y la salud emocional.', 80000);
 
+CREATE TABLE IF NOT EXISTS musculo_objetivo (
+id INT PRIMARY KEY AUTO_INCREMENT,
+descripcion VARCHAR(255) NOT NULL
+);
+
+INSERT IGNORE INTO musculo_objetivo (id, descripcion) VALUES
+    (1, "abductores"),
+    (2, "abdominales"),
+    (3, "adductores"),
+    (4, "biceps"),
+    (5, "sistema cardiovascular"),
+    (6, "deltoides"),
+    (7, "antebrazos"),
+    (8, "gluteos"),
+    (9, "isquiotibiales"),
+    (10, "dorsal"),
+    (11, "pectoral"),
+    (12, "triceps"),
+    (13, "espalda alta"),
+    (14, "cuadriceps");
+
+
+CREATE TABLE IF NOT EXISTS parte_del_cuerpo (
+id INT PRIMARY KEY AUTO_INCREMENT,
+descripcion VARCHAR(255) NOT NULL
+);
+
+INSERT IGNORE INTO parte_del_cuerpo (id, descripcion) VALUES
+    (1, "espalda"),
+    (2, "cardio"),
+    (3, "pecho"),
+    (4, "antebrazos"),
+    (5, "Piernas bajas"),
+    (6, "cuello"),
+    (7, "hombros"),
+    (8, "brazos superiores"),
+    (9, "piernas altas"),
+    (10, "cintura");

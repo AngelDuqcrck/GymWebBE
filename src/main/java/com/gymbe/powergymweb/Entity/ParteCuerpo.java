@@ -27,5 +27,5 @@ public class ParteCuerpo {
 
     @Column(nullable = false, length = 50)
     @NotEmpty
-    private String nombre; 
+    private String descripcion; 
 }
