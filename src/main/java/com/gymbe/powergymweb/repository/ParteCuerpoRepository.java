@@ -3,7 +3,6 @@ package com.gymbe.powergymweb.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.gymbe.powergymweb.Entity.ParteCuerpo;
-import java.util.List;
 import java.util.Optional;
 
 

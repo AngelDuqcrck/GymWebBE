@@ -20,7 +20,7 @@ public class MusculoController {
     private MusculoService musculoService;
 
     @GetMapping
-    public ResponseEntity<List<MusculoDTO>> listarEjercicios() {
+    public ResponseEntity<List<MusculoDTO>> listarMusculos() {
         return new ResponseEntity<>(musculoService.listarMusculos(), HttpStatus.OK);
     }
 

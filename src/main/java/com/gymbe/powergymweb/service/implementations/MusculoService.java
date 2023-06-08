@@ -3,6 +3,7 @@ package com.gymbe.powergymweb.service.implementations;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +26,7 @@ public class MusculoService {
 
     private MusculoDTO convertToMusculoDTO(MusculoObjetivo musculoObjetivo) {
         MusculoDTO musculoDTO = new MusculoDTO();
-        musculoDTO.setId(musculoObjetivo.getId());
-        musculoDTO.setDescripcion(musculoObjetivo.getDescripcion());
+        BeanUtils.copyProperties(musculoObjetivo, musculoDTO);
         return musculoDTO;
     }
 }
