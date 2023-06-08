@@ -60,16 +60,3 @@ INSERT IGNORE INTO parte_del_cuerpo (id, descripcion) VALUES
     (8, "brazos superiores"),
     (9, "piernas altas"),
     (10, "cintura");
-
-CREATE TABLE IF NOT EXISTS usuario (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    contrasena VARCHAR(255) NOT NULL, 
-    correo VARCHAR(255) NOT NULL,
-    nombre VARCHAR(255) NOT NULL,
-    rol_id int,
-    FOREIGN KEY (rol_id) REFERENCES rol (id)
-);
-
-INSERT IGNORE INTO usuario (correo, contrasena, nombre, rol_id)  VALUES 
-    ("admin@admin.com", "$2a$12$4AzuqGNswepxwcpCYyGCqeQFopXvxM8yFgs.QlyPmhOE6yJqhLai.", "administrador", 1)
-
