@@ -8,7 +8,13 @@ import java.util.ArrayList;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.User;
+
 
 import com.gymbe.powergymweb.Entity.Rol;
 import com.gymbe.powergymweb.Entity.Usuario;
@@ -102,6 +108,23 @@ public class UsuarioService implements UsuarioServiceInteface {
             return false;
         }
 
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Usuario userEntity = usuarioRepository.findByCorreo(username);
+
+        if (userEntity == null) {
+            throw new UsernameNotFoundException(username);
+        }
+
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        if (userEntity.getRol() != null) {
+            authorities.add(new SimpleGrantedAuthority(userEntity.getRol().getDescripcion()));
+        } else {
+            throw new UsernameNotFoundException("Error en el Login: usuario '" + username + "' no tiene roles asignados!");
+        }
+        return new User(userEntity.getCorreo(), userEntity.getContrasena(), authorities);
     }
 
 }

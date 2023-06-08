@@ -1,4 +1,4 @@
-package com.gymbe.powergymweb.Controller;
+package com.gymbe.powergymweb.controller;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import com.gymbe.powergymweb.models.requests.UsuarioRequest;
@@ -64,6 +65,7 @@ public class UsuarioController {
         return new MensajeResponse(message);
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/listar")
     public List<UsuarioResponse> ListarUsuariosporRol(@RequestParam String rol){
         List<UsuarioResponse> response = new ArrayList<>();
