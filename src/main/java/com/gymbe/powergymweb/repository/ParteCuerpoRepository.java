@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.gymbe.powergymweb.Entity.ParteCuerpo;
 
-@Repository
+
 public interface ParteCuerpoRepository  extends JpaRepository<ParteCuerpo, Integer>{
     
 }
