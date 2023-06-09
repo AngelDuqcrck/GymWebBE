@@ -13,7 +13,7 @@ INSERT IGNORE INTO rol (id,descripcion) VALUES
 CREATE TABLE IF NOT EXISTS plan (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
-    descripcion VARCHAR(255) NOT NULL,
+    descripcion VARCHAR(500) NOT NULL,
     precio DOUBLE NOT NULL
 );
 

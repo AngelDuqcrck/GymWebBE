@@ -45,6 +45,7 @@ public class PlanService implements PlanServiceInterface {
         Plan planExistente = planRepository.findById(planId)
                 .orElseThrow(() -> new RuntimeException("No se encontró el plan con el ID: " + planId));
 
+        planExistente.setNombre(planDTO.getNombre());
         planExistente.setDescripcion(planDTO.getDescripcion());
         planExistente.setPrecio(planDTO.getPrecio());
 
