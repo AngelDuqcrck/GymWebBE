@@ -65,6 +65,7 @@ public class PlanService implements PlanServiceInterface {
      */
     private PlanDTO convertToPlanDTO(Plan planEntity) {
         PlanDTO planDTO = new PlanDTO();
+        planDTO.setId(planEntity.getId());
         planDTO.setNombre(planEntity.getNombre());
         planDTO.setDescripcion(planEntity.getDescripcion());
         planDTO.setPrecio(planEntity.getPrecio());

@@ -35,7 +35,6 @@ public class PlanController {
      *         solicitud es exitosa.
      */
     @GetMapping
-    @Secured("ROLE_ADMIN")
     public ResponseEntity<List<PlanDTO>> listarPlanes() {
         return new ResponseEntity<>(planService.listarPlanes(), HttpStatus.OK);
     }
