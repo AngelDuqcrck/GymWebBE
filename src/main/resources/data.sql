@@ -13,7 +13,7 @@ INSERT IGNORE INTO rol (id,descripcion) VALUES
 CREATE TABLE IF NOT EXISTS plan (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
-    descripcion VARCHAR(500) NOT NULL,
+    descripcion TEXT NOT NULL,
     precio DOUBLE NOT NULL
 );
 
@@ -70,6 +70,6 @@ CREATE TABLE IF NOT EXISTS usuario (
     FOREIGN KEY (rol_id) REFERENCES rol (id)
 );
 
-INSERT IGNORE INTO usuario (correo, contrasena, nombre, rol_id)  VALUES 
-    ("admin@admin.com", "$2a$12$4AzuqGNswepxwcpCYyGCqeQFopXvxM8yFgs.QlyPmhOE6yJqhLai.", "administrador", 1)
+INSERT IGNORE INTO usuario (id, correo, contrasena, nombre, rol_id)  VALUES 
+    (1,"admin@admin.com", "$2a$12$4AzuqGNswepxwcpCYyGCqeQFopXvxM8yFgs.QlyPmhOE6yJqhLai.", "administrador", 1)
 

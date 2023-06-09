@@ -42,9 +42,7 @@ public class Cliente {
 
     private Date fechaInicioMensualidad;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario user;
+    private String nombre;
 
 
 }
