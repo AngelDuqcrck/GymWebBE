@@ -45,7 +45,7 @@ public class UsuarioService implements UsuarioServiceInteface {
     public UsuarioDTO crearEntrenador(UsuarioDTO usuario) {
 
         Usuario usuarioEntity = new Usuario();
-        usuarioEntity.setRol(rolRepository.findByDescripcion("ENTRENADOR"));
+        usuarioEntity.setRol(rolRepository.findByDescripcion("ROLE_ENTRENADOR"));
         BeanUtils.copyProperties(usuario, usuarioEntity);
         Usuario newEntrenador = usuarioRepository.save(usuarioEntity);
         UsuarioDTO usuarioARetornar = new UsuarioDTO();
@@ -68,7 +68,7 @@ public class UsuarioService implements UsuarioServiceInteface {
         List<Usuario> userEntities = new ArrayList<>();
 
         Rol rolEntity = rolRepository.findByDescripcion(rol);
-        if(rolEntity== null) throw new EntityNotFoundException("Rol no encontrador");
+        if(rolEntity== null) throw new EntityNotFoundException("Rol no encontrado");
         userEntities = usuarioRepository.findByRol(rolEntity);
 
         for (Usuario userEntity : userEntities) {

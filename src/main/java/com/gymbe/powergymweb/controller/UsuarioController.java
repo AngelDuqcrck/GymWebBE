@@ -57,7 +57,7 @@ public class UsuarioController {
      * @param email el correo electrónico del usuario.
      * @return mensaje informativo
      */
-    // @Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/eliminar")
     public MensajeResponse deleteEntrenador(@RequestParam String email) {
         boolean deleted = usuarioService.deleteEntrenador(email);
