@@ -11,10 +11,10 @@ public class EjercicioDTO {
     private String descripcion;
 
     
-    private MusculoObjetivo musculoObjetivo_id;
+    private Integer musculoObjetivo_id;
 
    
-    private ParteCuerpo parteCuerpo_id;
+    private Integer parteCuerpo_id;
 
 
     private String urlGif;

@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +39,7 @@ public class EjercicioController {
      */
     @GetMapping
     // @Secured("ROLE_ADMIN")
-    public ResponseEntity<List<EjercicioDTO>> listarEjercicios() {
+    public ResponseEntity<List<Ejercicio>> listarEjercicios() {
         return new ResponseEntity<>(ejercicioService.listarEjercicios(), HttpStatus.OK);
     }
 
@@ -55,6 +58,32 @@ public class EjercicioController {
         ejercicioService.crearEjercicio(ejercicioDTO);
         MensajeResponse mensajeResponse = new MensajeResponse("Ejercicio creado exitosamente");
         return ResponseEntity.status(HttpStatus.CREATED).body(mensajeResponse);
+    }
+
+    /**
+     * Actualiza un ejercicio específico.
+     *
+     * @param ejercicioRequest Objeto EjercicioRequest que contiene los datos del
+     *                         ejercicio a actualizar.
+     * @param id               Identificador del ejercicio a actualizar.
+     * @return ResponseEntity con un objeto MensajeResponse que indica el éxito de
+     *         la operación.
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<MensajeResponse> actualizarEjercicio(@RequestBody @Valid EjercicioRequest ejercicioRequest,
+            @PathVariable Integer id) {
+        EjercicioDTO ejercicioDTO = new EjercicioDTO();
+        BeanUtils.copyProperties(ejercicioRequest, ejercicioDTO);
+        ejercicioService.actualizarEjercicio(ejercicioDTO, id);
+        MensajeResponse mensajeResponse = new MensajeResponse("Ejercicio Actualizado exitosamente");
+
+        return ResponseEntity.ok().body(mensajeResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public MensajeResponse eliminarEjercicio(@PathVariable int id){
+        this.ejercicioService.elimiarEjercicio(id);
+        return new MensajeResponse("Ejercicio eliminado exitosamente");
     }
 
 }
