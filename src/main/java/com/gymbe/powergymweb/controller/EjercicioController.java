@@ -41,8 +41,8 @@ public class EjercicioController {
      */
     @GetMapping
     // @Secured("ROLE_ADMIN")
-    public ResponseEntity<List<Ejercicio>> listarEjercicios() {
-        return new ResponseEntity<>(ejercicioService.listarEjercicios(), HttpStatus.OK);
+    public List<Ejercicio> listarEjercicios() {
+        return ejercicioService.listarEjercicios();
     }
 
     /**

@@ -48,12 +48,11 @@ public class RutinaService implements RutinaServiceInterface {
             List<Ejercicio> ejercicios = ejercicioRepository.findAllById(ejercicioIds);
 
             for (Ejercicio ejercicio : ejercicios) {
-                System.out.println(ejercicio.getDescripcion());
-                System.out.println(rutinaGuardada.getDescripcion());
-                // EjercicioRutina ejercicioRutina = new EjercicioRutina();
-                // ejercicioRutina.setEjercicio(ejercicio);
-                // ejercicioRutina.setRutina(rutinaGuardada);
-                // ejercicioRutinaRepository.save(ejercicioRutina);
+                EjercicioRutina ejercicioRutina = new EjercicioRutina();
+                ejercicioRutina.setEjercicio(ejercicio);
+                ejercicioRutina.setRutina(rutinaGuardada);
+                ejercicioRutina.setDescripcion(rutinaGuardada.getDescripcion());
+                ejercicioRutinaRepository.save(ejercicioRutina);
             }
         }
     }  

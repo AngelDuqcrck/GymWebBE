@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +41,7 @@ public class Ejercicio {
     private ParteCuerpo parteCuerpo_id;
 
     @OneToMany(mappedBy = "ejercicio")
+    @JsonIgnore
     private List<EjercicioRutina> ejerciciosRutinas;
 
     private String urlGif;

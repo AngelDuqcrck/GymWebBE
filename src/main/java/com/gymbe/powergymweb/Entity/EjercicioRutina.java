@@ -20,6 +20,8 @@ public class EjercicioRutina {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public String descripcion;
+
     @ManyToOne
     @JoinColumn(name = "ejercicio_id")
     private Ejercicio ejercicio;
