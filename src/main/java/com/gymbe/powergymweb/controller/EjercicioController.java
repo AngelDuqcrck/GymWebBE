@@ -28,7 +28,7 @@ import com.gymbe.powergymweb.service.implementations.EjercicioService;
 import com.gymbe.powergymweb.shared.dto.EjercicioDTO;
 
 @RestController
-@RequestMapping("/ejercicio")
+@RequestMapping("/ejercicios")
 public class EjercicioController {
     @Autowired
     EjercicioService ejercicioService;
@@ -40,7 +40,7 @@ public class EjercicioController {
      *         respuesta.
      */
     @GetMapping
-    @Secured("ROLE_ADMIN")
+    // @Secured("ROLE_ADMIN")
     public ResponseEntity<List<Ejercicio>> listarEjercicios() {
         return new ResponseEntity<>(ejercicioService.listarEjercicios(), HttpStatus.OK);
     }
@@ -52,7 +52,7 @@ public class EjercicioController {
      *         respuesta.
      */
     @GetMapping("/{id}")
-    @Secured("ROLE_ADMIN")
+    // @Secured("ROLE_ADMIN")
     public ResponseEntity<Ejercicio> buscarEjerciciosId(@PathVariable int id) {
     Optional<Ejercicio> optionalEjercicio = ejercicioService.buscarEjerciciosId(id);
     Ejercicio ejercicio = optionalEjercicio.orElseThrow(() -> new NoSuchElementException("Ejercicio no encontrado"));
@@ -67,7 +67,7 @@ public class EjercicioController {
      * @return ResponseEntity con el mensaje de éxito en el cuerpo de la respuesta.
      */
     @PostMapping
-    @Secured("ROLE_ADMIN")
+    // @Secured("ROLE_ADMIN")
     public ResponseEntity<MensajeResponse> crearEjercicio(@RequestBody @Valid EjercicioRequest ejercicioRequest) {
         EjercicioDTO ejercicioDTO = new EjercicioDTO();
         BeanUtils.copyProperties(ejercicioRequest, ejercicioDTO);

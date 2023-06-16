@@ -9,3 +9,4 @@ import com.gymbe.powergymweb.Entity.EjercicioRutina;
 public interface EjercicioRutinaRepository extends JpaRepository<EjercicioRutina, Integer> {
     
 }
+
