@@ -1,6 +1,8 @@
 package com.gymbe.powergymweb.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -38,10 +40,24 @@ public class EjercicioController {
      *         respuesta.
      */
     @GetMapping
-    // @Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<List<Ejercicio>> listarEjercicios() {
         return new ResponseEntity<>(ejercicioService.listarEjercicios(), HttpStatus.OK);
     }
+
+    /**
+     * Endpoint para listar todos los ejercicios.
+     *
+     * @return ResponseEntity con la lista de ejercicios en el cuerpo de la
+     *         respuesta.
+     */
+    @GetMapping("/{id}")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<Ejercicio> buscarEjerciciosId(@PathVariable int id) {
+    Optional<Ejercicio> optionalEjercicio = ejercicioService.buscarEjerciciosId(id);
+    Ejercicio ejercicio = optionalEjercicio.orElseThrow(() -> new NoSuchElementException("Ejercicio no encontrado"));
+    return new ResponseEntity<>(ejercicio, HttpStatus.OK);
+}
 
     /**
      * Endpoint para crear un nuevo ejercicio.
@@ -51,7 +67,7 @@ public class EjercicioController {
      * @return ResponseEntity con el mensaje de éxito en el cuerpo de la respuesta.
      */
     @PostMapping
-    // @Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<MensajeResponse> crearEjercicio(@RequestBody @Valid EjercicioRequest ejercicioRequest) {
         EjercicioDTO ejercicioDTO = new EjercicioDTO();
         BeanUtils.copyProperties(ejercicioRequest, ejercicioDTO);

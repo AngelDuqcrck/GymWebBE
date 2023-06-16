@@ -37,6 +37,19 @@ public class EjercicioService implements EjercicioServiceInterface {
      * @return El objeto EjercicioDTO del ejercicio recién creado.
      */
     @Override
+    public Optional<Ejercicio> buscarEjerciciosId(int id) {
+       Optional<Ejercicio> ejercicioEntities = ejercicioRepository.findById(id);
+        return ejercicioEntities;
+    }
+
+    /**
+     * Crea un nuevo ejercicio a partir del objeto EjercicioDTO proporcionado.
+     *
+     * @param ejercicio El objeto EjercicioDTO que contiene los datos del ejercicio
+     *                  a crear.
+     * @return El objeto EjercicioDTO del ejercicio recién creado.
+     */
+    @Override
     public List<Ejercicio> listarEjercicios() {
         List<Ejercicio> ejercicioEntities = ejercicioRepository.findAll();
         return ejercicioEntities;
