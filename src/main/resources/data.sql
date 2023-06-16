@@ -28,20 +28,20 @@ descripcion VARCHAR(255) NOT NULL
 );
 
 INSERT IGNORE INTO musculo_objetivo (id, descripcion) VALUES
-    (1, "abductores"),
-    (2, "abdominales"),
-    (3, "adductores"),
-    (4, "biceps"),
-    (5, "sistema cardiovascular"),
-    (6, "deltoides"),
-    (7, "antebrazos"),
-    (8, "gluteos"),
-    (9, "isquiotibiales"),
-    (10, "dorsal"),
-    (11, "pectoral"),
-    (12, "triceps"),
-    (13, "espalda alta"),
-    (14, "cuadriceps");
+    (1, "Abductores"),
+    (2, "Abdominales"),
+    (3, "Adductores"),
+    (4, "Biceps"),
+    (5, "Sistema cardiovascular"),
+    (6, "Deltoides"),
+    (7, "Antebrazos"),
+    (8, "Gluteos"),
+    (9, "Isquiotibiales"),
+    (10, "Dorsal"),
+    (11, "Pectoral"),
+    (12, "Triceps"),
+    (13, "Espalda alta"),
+    (14, "Cuadriceps");
 
 
 CREATE TABLE IF NOT EXISTS parte_del_cuerpo (
@@ -50,16 +50,16 @@ descripcion VARCHAR(255) NOT NULL
 );
 
 INSERT IGNORE INTO parte_del_cuerpo (id, descripcion) VALUES
-    (1, "espalda"),
-    (2, "cardio"),
-    (3, "pecho"),
-    (4, "antebrazos"),
+    (1, "Espalda"),
+    (2, "Cardio"),
+    (3, "Pecho"),
+    (4, "Antebrazos"),
     (5, "Piernas bajas"),
-    (6, "cuello"),
-    (7, "hombros"),
-    (8, "brazos superiores"),
-    (9, "piernas altas"),
-    (10, "cintura");
+    (6, "Cuello"),
+    (7, "Hombros"),
+    (8, "Brazos superiores"),
+    (9, "Piernas altas"),
+    (10, "Cintura");
 
 CREATE TABLE IF NOT EXISTS usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,

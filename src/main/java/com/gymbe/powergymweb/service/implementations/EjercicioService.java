@@ -83,6 +83,10 @@ public class EjercicioService implements EjercicioServiceInterface {
         }
         Ejercicio ejercicioEntity = ejerciciofound.get();
         BeanUtils.copyProperties(ejercicio, ejercicioEntity);
+        Optional<MusculoObjetivo> musculoEntity = musculoObjetivoRepository.findById(ejercicio.getMusculoObjetivo_id());
+        Optional<ParteCuerpo> parteCuerpo = parteCuerpoRepository.findById(ejercicio.getParteCuerpo_id());
+        ejercicioEntity.setMusculoObjetivo_id(musculoEntity.get());
+        ejercicioEntity.setParteCuerpo_id(parteCuerpo.get());
         ejercicioRepository.save(ejercicioEntity);
         EjercicioDTO ejercicioActualizado = new EjercicioDTO();
         BeanUtils.copyProperties(ejercicioEntity, ejercicioActualizado);
