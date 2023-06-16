@@ -1,5 +1,6 @@
 package com.gymbe.powergymweb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -9,8 +10,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.gymbe.powergymweb.Entity.Ejercicio;
+import com.gymbe.powergymweb.Entity.EjercicioRutina;
+import com.gymbe.powergymweb.Entity.Rutina;
 import com.gymbe.powergymweb.models.requests.RutinaRequest;
 import com.gymbe.powergymweb.models.responses.MensajeResponse;
+import com.gymbe.powergymweb.repository.RutinaRepository;
 import com.gymbe.powergymweb.service.implementations.RutinaService;
 import com.gymbe.powergymweb.shared.dto.RutinaDTO;
 
@@ -20,6 +25,9 @@ public class RutinaController {
     
     @Autowired
     private RutinaService rutinaService;
+
+    @Autowired
+    private RutinaRepository rutinaRepository;
 
     /**
      * 
@@ -32,7 +40,7 @@ public class RutinaController {
      * @return Un objeto MensajeResponse indicando el resultado de la operación.
      * @throws EntityNotFoundException Si no se pudo crear la rutina.
      */
-@PostMapping
+    @PostMapping
     public MensajeResponse crearRutina(@RequestBody @Valid RutinaRequest rutinaRequest) {
         try {
             RutinaDTO rutinaDTO = new RutinaDTO();
@@ -47,5 +55,16 @@ public class RutinaController {
     @GetMapping
     public List<RutinaDTO> listarRutinas() {
         return rutinaService.listarRutinas();
+    }
+
+    @GetMapping("/ejerciciosRutina/{id}")
+    public List<Ejercicio> listarEjerciciosDeUnaRutina(@PathVariable int id) {
+        Rutina rutina = this.rutinaRepository.findById(id).get();
+        List<EjercicioRutina> ejerciciosRutina = rutina.getEjerciciosRutinas();
+        List<Ejercicio> listaEjercicios = new ArrayList<>();
+        for (EjercicioRutina ejercicios : ejerciciosRutina){
+            listaEjercicios.add(ejercicios.getEjercicio());
+        }
+        return listaEjercicios;
     }
 }
